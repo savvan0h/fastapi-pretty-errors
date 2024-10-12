@@ -35,7 +35,6 @@ You can specify custom configuration options for PrettyErrors when adding the mi
 ```python
 from fastapi import FastAPI
 from fastapi_pretty_errors import PrettyErrorsMiddleware
-import pretty_errors
 
 app = FastAPI()
 
