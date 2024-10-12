@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fastapi-pretty-errors"
-version = "0.1.0"
+version = "0.1.1"
 description = "A FastAPI middleware to prettify exceptions using PrettyErrors."
 authors = ["Hiroki Sawano <hiroki.sawano.2512@gmail.com>"]
 license = "MIT"
