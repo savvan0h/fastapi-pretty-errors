@@ -41,10 +41,10 @@ app = FastAPI()
 app.add_middleware(
     PrettyErrorsMiddleware,
     # PrettyErrors configuration options
-    display_locals=True,
     line_number_first=True,
     lines_before=5,
     lines_after=2,
+    # ...
 )
 ```
 
@@ -59,9 +59,19 @@ Create a file named `main.py` with the following content:
 ```python
 from fastapi import FastAPI
 from fastapi_pretty_errors import PrettyErrorsMiddleware
+import pretty_errors
 
 app = FastAPI()
-app.add_middleware(PrettyErrorsMiddleware)
+app.add_middleware(
+    PrettyErrorsMiddleware,
+    line_number_first=True,
+    lines_before=5,
+    lines_after=2,
+    line_color=pretty_errors.RED + "> " + pretty_errors.default_config.line_color,
+    code_color="  " + pretty_errors.default_config.line_color,
+    truncate_code=True,
+    display_locals=True,
+)
 
 
 @app.get("/")
@@ -84,18 +94,4 @@ curl http://localhost:8000
 
 Check the terminal where the FastAPI application is running. You should see a formatted traceback provided by `fastapi-pretty-errors` :
 
-```
-...
-routing.py 301 app
-raw_response = await run_endpoint_function(
-
-routing.py 212 run_endpoint_function
-return await dependant.call(**values)
-
-main.py 10 root
-raise ValueError("An error occurred")
-
-ValueError:
-An error occurred
-INFO:     127.0.0.1:65119 - "GET / HTTP/1.1" 500 Internal Server Error
-```
+![Example](images/example.png)
